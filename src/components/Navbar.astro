@@ -34,13 +34,48 @@ import ThemeToggle from "./ThemeToggle.astro";
         >
       </div>
     </div>
-    <button class="mobile-toggle" aria-label="Toggle menu">
+    <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
   </div>
 </nav>
+
+<script is:inline>
+  function initMobileMenu() {
+    const toggle = document.getElementById('mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    const navActions = document.querySelector('.nav-actions');
+
+    if (!toggle || !navLinks || !navActions) return;
+
+    // Reset before adding
+    toggle.classList.remove('active');
+    navLinks.classList.remove('active');
+    navActions.classList.remove('active');
+
+    toggle.onclick = () => {
+      navLinks.classList.toggle('active');
+      navActions.classList.toggle('active');
+      toggle.classList.toggle('active');
+    };
+
+    // Close menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.onclick = () => {
+        navLinks.classList.remove('active');
+        navActions.classList.remove('active');
+        toggle.classList.remove('active');
+      };
+    });
+  }
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  // Also for Astro view transitions if used
+  document.addEventListener('astro:page-load', initMobileMenu);
+</script>
 
 <style>
   .navbar {
@@ -116,6 +151,7 @@ import ThemeToggle from "./ThemeToggle.astro";
     background: none;
     border: none;
     cursor: pointer;
+    z-index: 1001;
   }
 
   .mobile-toggle span {
@@ -125,17 +161,66 @@ import ThemeToggle from "./ThemeToggle.astro";
     transition: var(--transition);
   }
 
+  /* Hamburger Animation */
+  .mobile-toggle.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .mobile-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-toggle.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   @media (max-width: 992px) {
-    .nav-links,
-    .nav-cta {
+    .nav-links {
       display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 70%;
+      background: var(--white);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+      z-index: 1000;
+      padding: 2rem;
     }
-    .mobile-toggle {
+
+    .nav-links.active {
       display: flex;
     }
+
     .nav-actions {
-      margin-left: auto;
-      margin-right: 1rem;
+      display: none;
+      position: fixed;
+      bottom: 10vh;
+      right: 0;
+      width: 70%;
+      flex-direction: column;
+      z-index: 1001;
+      gap: 1.5rem;
+    }
+
+    .nav-actions.active {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-cta {
+      width: 100%;
+      text-align: center;
+    }
+
+    .nav-cta .btn {
+      width: 80%;
+    }
+
+    .mobile-toggle {
+      display: flex;
     }
   }
 </style>

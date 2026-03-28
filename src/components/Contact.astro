@@ -308,11 +308,39 @@
   @media (max-width: 992px) {
     .contact-wrapper {
       grid-template-columns: 1fr;
-      padding: 2.5rem;
+      padding: 2.5rem 1.5rem;
       border-radius: 35px;
+      gap: 3rem;
     }
+
+    .contact-info h2 {
+      font-size: 2.4rem;
+    }
+
+    .contact-info p {
+      margin-bottom: 2.5rem;
+    }
+
     .contact-form {
-      padding: 2rem;
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact-info h2 {
+      font-size: 2rem;
+    }
+    
+    .contact-social-links {
+      flex-wrap: wrap;
+    }
+
+    .detail-item strong {
+      font-size: 1rem;
+    }
+    
+    input, select, textarea {
+      padding: 0.9rem;
     }
   }
 </style>
