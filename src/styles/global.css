@@ -107,10 +107,10 @@ ul {
 }
 
 [data-theme="dark"] .btn-primary {
-  background: var(--gradient);
-  color: var(--text);
-  /* Dark text on gold for readability */
-  /* box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); */
+  background: var(--gold);
+  color: #000000;
+  /* High contrast black on gold */
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
 }
 
 .btn-primary:hover {
@@ -154,6 +154,11 @@ ul {
   border: 1px solid var(--border);
 }
 
+[data-theme="dark"] .glass {
+  background: rgba(18, 18, 18, 0.85);
+  /* Proper dark glass */
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -174,4 +179,68 @@ ul {
 /* Gold border highlight */
 .gold-border {
   border: 1px solid var(--gold);
+}
+
+/* REGLAS DE SEGURIDAD PARA DARK MODE */
+[data-theme="dark"] h2 {
+  color: #D4AF37 !important; /* TODOS los H2 deben ser Dorados */
+}
+
+[data-theme="dark"] .section-header p {
+  color: #D4AF37 !important; /* Subtítulos dorados en secciones de testimonios/media */
+}
+
+[data-theme="dark"] .detail-item strong {
+  color: #D4AF37 !important; /* Etiquetas de contacto Doradas */
+}
+
+[data-theme="dark"] .detail-item p,
+[data-theme="dark"] .detail-item a {
+  color: #FFFFFF !important; /* Textos de contacto Blancos */
+}
+
+/* Fix Hero buttons to be Gold in Dark Mode */
+[data-theme="dark"] .hero .btn-primary, 
+[data-theme="dark"] .hero .btn-silver {
+  background: #D4AF37 !important;
+  color: #000000 !important;
+}
+
+[data-theme="dark"] .hero .btn-outline {
+  border: 2px solid #D4AF37 !important;
+  color: #D4AF37 !important;
+}
+
+[data-theme="dark"] .hero .btn-outline:hover {
+  background: #D4AF37 !important;
+  color: #000000 !important;
+}
+
+/* FIX: Icon background in Services in Dark Mode */
+[data-theme="dark"] .glass-red {
+  background: #1F2937 !important; /* Gray matching the card background */
+  box-shadow: none !important;
+  border: 1px solid #D4AF37 !important; /* Gold border around icon for accent */
+}
+
+/* FIX: About Experience Badge in Dark Mode */
+[data-theme="dark"] .experience-badge {
+  background: #D4AF37 !important; /* Gold background */
+  color: #000000 !important; /* Black text for readability on gold */
+  border-color: #000000 !important;
+}
+
+/* FIX: Contact labels and info texts in Dark Mode */
+[data-theme="dark"] .contact-info p,
+[data-theme="dark"] .detail-item p,
+[data-theme="dark"] .detail-item a.email-link {
+  color: #FFFFFF !important; /* Pure white for high visibility */
+  opacity: 1 !important;
+}
+
+/* FIX: Footer text accessibility on Red background */
+.footer-brand p,
+.footer-bottom p {
+  opacity: 0.95 !important; /* Force more visibility on the dark red background */
+  color: #FFFFFF !important;
 }

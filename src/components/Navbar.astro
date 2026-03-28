@@ -223,4 +223,11 @@ import ThemeToggle from "./ThemeToggle.astro";
       display: flex;
     }
   }
+
+  /* FORCED: Red button in dark mode as requested */
+  :global([data-theme="dark"]) .nav-cta .btn-primary {
+    background: linear-gradient(to right bottom, rgb(76, 3, 0), rgb(159, 5, 0)) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 15px rgba(159, 5, 0, 0.3) !important;
+  }
 </style>

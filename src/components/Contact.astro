@@ -24,11 +24,11 @@
                 <i class="bi bi-instagram"></i>
               </a>
               <a
-                href="https://www.threads.com/@sexoterapiaok"
+                href="https://www.tiktok.com/@sexoterapiaok?_r=1&_t=ZS-954bgTW2yqw"
                 target="_blank"
-                aria-label="Threads"
+                aria-label="TikTok"
               >
-                <i class="bi bi-threads"></i>
+                <i class="bi bi-tiktok"></i>
               </a>
               <a
                 href="https://www.youtube.com/@sexoterapiaok"
@@ -178,7 +178,7 @@
   }
 
   .tag {
-    color: var(--primary);
+    color: var(--tag-color);
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -190,7 +190,7 @@
   .contact-info h2 {
     font-size: 3rem;
     margin-bottom: 2rem;
-    color: var(--primary-dark);
+    color: var(--heading-color);
   }
 
   .contact-info p {
@@ -207,8 +207,16 @@
   .detail-item strong {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--text);
+    color: var(--text); /* var(--text) is white in dark mode */
     font-size: 1.1rem;
+  }
+
+  [data-theme="dark"] .detail-item strong {
+    color: var(--gold); /* Gold for titles in dark mode */
+  }
+
+  .detail-item p {
+    color: var(--text);
   }
 
   .detail-item a.email-link {
@@ -259,7 +267,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
-    background: var(--background);
+    background: var(--white);
     padding: 3rem;
     border-radius: 30px;
     border: 1px solid var(--border);
@@ -282,11 +290,12 @@
   textarea {
     padding: 1.1rem;
     border-radius: 15px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     font-family: inherit;
     font-size: 1rem;
     transition: var(--transition);
-    background: var(--white);
+    background: var(--background);
+    color: var(--text);
   }
 
   input:focus,
@@ -294,7 +303,13 @@
   textarea:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(159, 5, 0, 0.1);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+  }
+
+  [data-theme="dark"] input,
+  [data-theme="dark"] select,
+  [data-theme="dark"] textarea {
+    background: #1a1a1a;
   }
 
   .btn-block {
@@ -330,7 +345,7 @@
     .contact-info h2 {
       font-size: 2rem;
     }
-    
+
     .contact-social-links {
       flex-wrap: wrap;
     }
@@ -338,8 +353,10 @@
     .detail-item strong {
       font-size: 1rem;
     }
-    
-    input, select, textarea {
+
+    input,
+    select,
+    textarea {
       padding: 0.9rem;
     }
   }

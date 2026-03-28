@@ -25,11 +25,11 @@
         <i class="bi bi-instagram"></i>
       </a>
       <a
-        href="https://www.threads.com/@sexoterapiaok"
+        href="https://www.tiktok.com/@sexoterapiaok?_r=1&_t=ZS-954bgTW2yqw"
         target="_blank"
-        aria-label="Threads"
+        aria-label="TikTok"
       >
-        <i class="bi bi-threads"></i>
+        <i class="bi bi-tiktok"></i>
       </a>
       <a
         href="https://www.youtube.com/@sexoterapiaok"
@@ -70,12 +70,19 @@
     position: relative;
     height: 100vh;
     min-height: 700px;
-    background-image: url("/images/hero_bg.png");
+    background-image: url("/images/IMG_5543.jpeg");
     background-size: cover;
-    background-position: center;
+    background-position: center top; /* Focuses on the face/upper part */
     display: flex;
     align-items: center;
     color: var(--white);
+  }
+
+  /* Responsive background for mobile */
+  @media (max-width: 768px) {
+    .hero {
+      background-position: center center;
+    }
   }
 
   /* .hero-overlay {
@@ -132,8 +139,23 @@
   }
 
   .btn-outline:hover {
-    background: var(--white);
-    color: var(--primary-dark);
+    background: var(--primary);
+    color: var(--white);
+  }
+
+  [data-theme="dark"] .btn-primary {
+    background: var(--gold) !important;
+    color: #000000 !important;
+  }
+
+  [data-theme="dark"] .btn-outline {
+    border: 2px solid var(--gold) !important;
+    color: var(--gold) !important;
+  }
+
+  [data-theme="dark"] .btn-outline:hover {
+    background: var(--gold) !important;
+    color: #000000 !important;
   }
 
   .social-links {

@@ -26,6 +26,18 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 		<!-- GSAP -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" is:inline></script>
+		
+		<!-- Critical: Force Theme Before Render -->
+		<script is:inline>
+			(function() {
+				const theme = localStorage.getItem('theme');
+				if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+					document.documentElement.setAttribute('data-theme', 'dark');
+				} else {
+					document.documentElement.setAttribute('data-theme', 'light');
+				}
+			})();
+		</script>
 	</head>
 	<body>
 		<slot />

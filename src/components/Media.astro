@@ -64,7 +64,7 @@ const mediaItems = [
   }
 
   .tag {
-    color: var(--primary);
+    color: var(--tag-color);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -75,8 +75,12 @@ const mediaItems = [
 
   h2 {
     font-size: 3rem;
-    color: var(--primary-dark);
+    color: var(--heading-color) !important;
     margin-bottom: 1.5rem;
+  }
+
+  [data-theme="dark"] .section-header p {
+    color: var(--gold) !important;
   }
 
   .media-grid {

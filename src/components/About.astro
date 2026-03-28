@@ -1,11 +1,16 @@
 ---
+
 ---
 
 <section id="sobre-mi" class="section about">
   <div class="container fade-in">
     <div class="about-wrapper">
       <div class="about-image">
-        <img src="/images/about_portrait.png" alt="Santiago Ruiz Diaz" class="gold-border" />
+        <img
+          src="/images/IMG_0013.jpeg"
+          alt="Santiago Ruiz Diaz"
+          class="gold-border"
+        />
         <div class="experience-badge">
           <span>4+</span>
           <p>Años en Clínica</p>
@@ -15,18 +20,18 @@
         <span class="brand-tag">Sobre Mí</span>
         <h2>Santiago Ruiz Diaz</h2>
         <p>
-          Tengo 30 años y trabajo en la clínica hace 4
-          años desde una perspectiva teórico cognitivo-conductual (TCC).
+          Tengo 30 años y trabajo en la clínica hace 4 años desde una
+          perspectiva teórico cognitivo-conductual (TCC).
         </p>
         <p>
           Desde febrero del 2020 creo y divulgo información sobre sexualidad,
           ESI, género, LGBTIQA+ y relaciones no monógamas en mis redes sociales
-          bajo el nombre de <strong>@sexoterapiaok</strong>. 
+          bajo el nombre de <strong>@sexoterapiaok</strong>.
         </p>
         <p>
-          En 2024 creé la marca <strong>Lubriq</strong>, un
-          SexShop diseñado para brindarte un asesoramiento completo a la hora de elegir
-          tu producto ideal.
+          En 2024 creé la marca <strong>Lubriq</strong>, un SexShop diseñado
+          para brindarte un asesoramiento completo a la hora de elegir tu
+          producto ideal.
         </p>
         <ul class="trajectory-list">
           <li>
@@ -41,7 +46,11 @@
         </ul>
         <div class="about-actions">
           <a href="#contacto" class="btn btn-primary">Conozcámonos</a>
-          <a href="https://instagram.com/sexoterapiaok" target="_blank" class="btn btn-outline">Seguir en IG</a>
+          <a
+            href="https://instagram.com/sexoterapiaok"
+            target="_blank"
+            class="btn btn-outline">Seguir en IG</a
+          >
         </div>
       </div>
     </div>
@@ -68,6 +77,9 @@
     border-radius: 40px;
     box-shadow: var(--shadow);
     width: 100%;
+    max-height: 550px; /* Limits the height to prevent stretching the section */
+    object-fit: cover; /* Ensures the image fills the area without distortion */
+    object-position: center;
   }
 
   .experience-badge {
@@ -82,6 +94,12 @@
     box-shadow: var(--shadow);
     border: 1px solid var(--gold);
     min-width: 140px;
+  }
+
+  [data-theme="dark"] .experience-badge {
+    background: var(--gold);
+    color: #000000;
+    border-color: #000000;
   }
 
   .experience-badge span {
@@ -161,9 +179,19 @@
     color: var(--primary);
   }
 
+  [data-theme="dark"] .btn-primary {
+    background: var(--gold);
+    color: #000000;
+  }
+
   [data-theme="dark"] .btn-outline {
     border-color: var(--gold);
     color: var(--gold);
+  }
+
+  [data-theme="dark"] .btn-outline:hover {
+    background: var(--gold);
+    color: #000000;
   }
 
   @media (max-width: 992px) {
