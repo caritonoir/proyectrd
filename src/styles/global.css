@@ -1,0 +1,177 @@
+:root {
+  --primary: #9F0500;
+  --primary-dark: #4C0300;
+  --accent: #F3F4F6;
+  /* Silver/Light Grey */
+  --gold: #D4AF37;
+  /* Adjusted to a more classic gold for contrast */
+  --background: #F9FAFB;
+  --text: #111827;
+  --text-muted: #4B5563;
+  --white: #FFFFFF;
+  --glass: rgba(255, 255, 255, 0.85);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --gradient: linear-gradient(to right bottom, rgb(76, 3, 0), rgb(159, 5, 0));
+  --border: rgba(0, 0, 0, 0.1);
+  --heading-color: var(--primary-dark);
+  --tag-color: var(--primary);
+}
+
+[data-theme="dark"] {
+  --background: #000000;
+  /* Pure black for maximum contrast */
+  --text: #F3F4F6;
+  --text-muted: #D1D5DB;
+  --white: #121212;
+  /* Very dark grey for cards */
+  --glass: rgba(18, 18, 18, 0.85);
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  --border: rgba(255, 255, 255, 0.2);
+  --accent: #1F2937;
+  /* Swapping primary colors for gold in dark mode for better legibility */
+  --heading-color: var(--gold);
+  --tag-color: var(--gold);
+  --primary: var(--gold);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Inter', system-ui, sans-serif;
+  scroll-behavior: smooth;
+  background: var(--background);
+  color: var(--text);
+}
+
+body {
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  color: var(--text);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: 6rem 0;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--gradient);
+  color: #FFFFFF;
+  /* Force white for gradient contrast */
+  box-shadow: 0 4px 15px rgba(159, 5, 0, 0.3);
+}
+
+[data-theme="dark"] .btn-primary {
+  background: var(--gradient);
+  color: var(--text);
+  /* Dark text on gold for readability */
+  /* box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); */
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(159, 5, 0, 0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* Accent for silver/white buttons */
+.btn-silver {
+  background: var(--accent);
+  color: #111827;
+  /* Dark text for silver button */
+}
+
+[data-theme="dark"] .btn-silver {
+  background: #374151;
+  color: #FFFFFF;
+}
+
+.btn-silver:hover {
+  background: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* Gold border highlight */
+.gold-border {
+  border: 1px solid var(--gold);
+}

@@ -1,0 +1,147 @@
+---
+const mediaItems = [
+  {
+    type: 'Podcast',
+    title: 'Sexoterapia en tu oído',
+    description: 'Explorando la sexualidad con profesionalismo, ciencia y humor. Todo lo que quieres saber y no te animas a preguntar.',
+    link: '#',
+    icon: '🎙️'
+  },
+  {
+    type: 'Marca',
+    title: 'Lubriq SexShop',
+    description: 'Nuestra marca de productos seleccionados para mejorar tu placer con el asesoramiento adecuado.',
+    link: '#',
+    icon: '✨'
+  },
+  {
+    type: 'Video / Reel',
+    title: 'ESI en 1 Minuto',
+    description: 'Contenido rápido y efectivo sobre educación sexual integral para todas las edades en @sexoterapiaok.',
+    link: 'https://instagram.com/sexoterapiaok',
+    icon: '🎥'
+  },
+  {
+    type: 'Blog / Notas',
+    title: 'Relaciones No Monógamas',
+    description: 'Artículos y reflexiones sobre la construcción de vínculos diversos y honestos.',
+    link: '#',
+    icon: '📝'
+  }
+];
+---
+<section id="media" class="section media">
+  <div class="container fade-in">
+    <div class="section-header">
+      <span class="tag">Contenido</span>
+      <h2>Recursos y Divulgación</h2>
+      <p>Espacios donde compartimos información para desestigmatizar la sexualidad y fomentar el bienestar.</p>
+    </div>
+    <div class="media-grid">
+      {mediaItems.map(item => (
+        <a href={item.link} class="media-card gold-border">
+          <div class="media-icon">{item.icon}</div>
+          <div class="media-info">
+            <span class="media-type">{item.type}</span>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+            <span class="read-more">Ver contenido →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .media {
+    background: var(--background);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .tag {
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h2 {
+    font-size: 3rem;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .media-card {
+    padding: 2.5rem;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: var(--transition);
+    text-decoration: none;
+    color: var(--text);
+    background: var(--white);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  }
+
+  .media-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+  }
+
+  .media-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .media-type {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1.5rem;
+    color: var(--text);
+  }
+
+  .media-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    flex-grow: 1;
+    line-height: 1.6;
+  }
+
+  .read-more {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-bottom: 2px solid var(--accent);
+    align-self: flex-start;
+  }
+
+  .media-card:hover .read-more {
+    border-color: var(--primary);
+  }
+</style>

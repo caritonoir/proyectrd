@@ -1,0 +1,141 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+---
+
+<nav class="navbar glass">
+  <div class="container nav-content">
+    <div class="logo">
+      <a href="/">
+        <img
+          src="/images/logoNegro.png"
+          alt="Logo"
+          class="nav-logo logo-light"
+        />
+        <img
+          src="/images/logoBlanco.png"
+          alt="Logo"
+          class="nav-logo logo-dark"
+        />
+        Sexoterapia
+      </a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#sobre-mi">Sobre Mí</a></li>
+      <li><a href="#media">Media</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <ThemeToggle />
+      <div class="nav-cta">
+        <a href="https://goo.su/adI6yQb" target="_blank" class="btn btn-primary"
+          >Reserva una cita</a
+        >
+      </div>
+    </div>
+    <button class="mobile-toggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.8rem 0;
+    transition: var(--transition);
+  }
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo a {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    font-family: "Outfit", sans-serif;
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo {
+    height: 56px;
+    width: auto;
+  }
+
+  .logo-dark {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .logo-light {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .logo-dark {
+    display: block;
+  }
+
+  .logo span {
+    color: var(--primary);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--text);
+    transition: var(--transition);
+  }
+
+  @media (max-width: 992px) {
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+    .mobile-toggle {
+      display: flex;
+    }
+    .nav-actions {
+      margin-left: auto;
+      margin-right: 1rem;
+    }
+  }
+</style>

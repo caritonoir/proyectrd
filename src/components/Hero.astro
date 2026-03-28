@@ -1,0 +1,176 @@
+---
+
+---
+
+<section id="inicio" class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content fade-in">
+    <h1>Redefine tu sexualidad con bienestar</h1>
+    <p>
+      Acompañamiento profesional en sexualidad, género y vínculos diversos para
+      construir una vida más libre y auténtica.
+    </p>
+    <div class="hero-actions">
+      <a href="https://goo.su/adI6yQb" target="_blank" class="btn btn-silver"
+        >Reserva una cita</a
+      >
+      <a href="#servicios" class="btn btn-outline">Nuestros Servicios</a>
+    </div>
+    <div class="social-links">
+      <a
+        href="https://instagram.com/sexoterapiaok"
+        target="_blank"
+        aria-label="Instagram"
+      >
+        <i class="bi bi-instagram"></i>
+      </a>
+      <a
+        href="https://www.threads.com/@sexoterapiaok"
+        target="_blank"
+        aria-label="Threads"
+      >
+        <i class="bi bi-threads"></i>
+      </a>
+      <a
+        href="https://www.youtube.com/@sexoterapiaok"
+        target="_blank"
+        aria-label="Youtube"
+      >
+        <i class="bi bi-youtube"></i>
+      </a>
+      <a
+        href="https://open.spotify.com/show/5BMmMKpkxAw702wiCx4SOE?si=A-cm--ULRKKoIV35-HTa4Q"
+        target="_blank"
+        aria-label="Spotify"
+      >
+        <i class="bi bi-spotify"></i>
+      </a>
+
+      <a
+        href="https://www.twitch.tv/sexoterapiaok"
+        target="_blank"
+        aria-label="Twitch"
+      >
+        <i class="bi bi-twitch"></i>
+      </a>
+
+      <a
+        href="https://www.linkedin.com/in/lic-santiagoruizdiaz"
+        target="_blank"
+        aria-label="Linkedin"
+      >
+        <i class="bi bi-linkedin"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    background-image: url("/images/hero_bg.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+  }
+
+  /* .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(76, 3, 0, 0.85),
+      rgba(159, 5, 0, 0.4)
+    );
+  }
+
+  [data-theme="dark"] .hero-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6));
+  } */
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+    line-height: 1.1;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  p {
+    font-size: 1.4rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+    font-weight: 500;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .btn-outline {
+    border-color: var(--white);
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+  }
+
+  .btn-outline:hover {
+    background: var(--white);
+    color: var(--primary-dark);
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .social-links a {
+    font-size: 1.8rem;
+    color: var(--white);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-links a:hover {
+    color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .social-links svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.8rem;
+    }
+    p {
+      font-size: 1.1rem;
+    }
+    .hero-actions {
+      flex-direction: column;
+    }
+  }
+</style>

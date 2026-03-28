@@ -1,0 +1,178 @@
+---
+---
+
+<section id="sobre-mi" class="section about">
+  <div class="container fade-in">
+    <div class="about-wrapper">
+      <div class="about-image">
+        <img src="/images/about_portrait.png" alt="Santiago Ruiz Diaz" class="gold-border" />
+        <div class="experience-badge">
+          <span>4+</span>
+          <p>Años en Clínica</p>
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="brand-tag">Sobre Mí</span>
+        <h2>Santiago Ruiz Diaz</h2>
+        <p>
+          Tengo 30 años y trabajo en la clínica hace 4
+          años desde una perspectiva teórico cognitivo-conductual (TCC).
+        </p>
+        <p>
+          Desde febrero del 2020 creo y divulgo información sobre sexualidad,
+          ESI, género, LGBTIQA+ y relaciones no monógamas en mis redes sociales
+          bajo el nombre de <strong>@sexoterapiaok</strong>. 
+        </p>
+        <p>
+          En 2024 creé la marca <strong>Lubriq</strong>, un
+          SexShop diseñado para brindarte un asesoramiento completo a la hora de elegir
+          tu producto ideal.
+        </p>
+        <ul class="trajectory-list">
+          <li>
+            <strong>Formación:</strong> Licenciado en Psicología
+          </li>
+          <li>
+            <strong>Especialidad:</strong> Perspectiva TCC, Sexualidad y Género
+          </li>
+          <li>
+            <strong>Emprendimiento:</strong> Fundador de Lubriq
+          </li>
+        </ul>
+        <div class="about-actions">
+          <a href="#contacto" class="btn btn-primary">Conozcámonos</a>
+          <a href="https://instagram.com/sexoterapiaok" target="_blank" class="btn btn-outline">Seguir en IG</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: var(--white);
+  }
+
+  .about-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-image {
+    position: relative;
+  }
+
+  .about-image img {
+    border-radius: 40px;
+    box-shadow: var(--shadow);
+    width: 100%;
+  }
+
+  .experience-badge {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    background: var(--gradient);
+    color: var(--white);
+    padding: 1.5rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gold);
+    min-width: 140px;
+  }
+
+  .experience-badge span {
+    font-size: 2.2rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+  }
+
+  .brand-tag {
+    color: var(--tag-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--heading-color);
+  }
+
+  .about-content p {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  .trajectory-list {
+    margin-bottom: 3rem;
+    background: var(--background);
+    padding: 2rem;
+    border-radius: 20px;
+    border-left: 4px solid var(--primary);
+  }
+
+  [data-theme="dark"] .trajectory-list {
+    background: #000000;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+  }
+
+  .trajectory-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text);
+  }
+
+  .trajectory-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .trajectory-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 800;
+  }
+
+  [data-theme="dark"] .experience-badge {
+    color: #000000;
+    background: var(--gold);
+  }
+
+  .about-actions {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .btn-outline {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+  }
+
+  [data-theme="dark"] .btn-outline {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  @media (max-width: 992px) {
+    .about-wrapper {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .about-actions {
+      flex-direction: column;
+    }
+  }
+</style>

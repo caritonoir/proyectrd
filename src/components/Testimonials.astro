@@ -1,0 +1,169 @@
+---
+const testimonials = [
+  {
+    name: 'M. García',
+    text: 'Encontrar un espacio tan respetuoso y libre de prejuicios fue clave para mi proceso personal. Recomiendo totalmente a Santiago.',
+    role: 'Terapia Individual'
+  },
+  {
+    name: 'Vínculo Diverso',
+    text: 'Nos ayudó a navegar las dudas sobre la apertura del vínculo con herramientas claras y mucha empatía.',
+    role: 'Terapia de Pareja'
+  },
+  {
+    name: 'Juan Pérez',
+    text: 'Su enfoque sobre género y diversidad me permitió sentirme validado y escuchado por primera vez en un espacio clínico.',
+    role: 'Terapia Individual'
+  }
+];
+---
+<section id="testimonios" class="section testimonials">
+  <div class="container fade-in">
+    <div class="section-header">
+      <span class="tag">Opiniones</span>
+      <h2>Testimonios Reales</h2>
+      <p>Lo que dicen quienes han transitado sus procesos de transformación y aprendizaje con nosotros.</p>
+    </div>
+    <div class="testimonials-grid">
+      {testimonials.map(t => (
+        <div class="testimonial-card">
+          <div class="quote-icon">“</div>
+          <p class="testimonial-text">{t.text}</p>
+          <div class="testimonial-footer">
+            <strong>{t.name}</strong>
+            <span>{t.role}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="social-cta glass-dark">
+      <h3>Síguenos para más información</h3>
+      <p>Contenido diario sobre sexualidad, ESI y bienestar emocional.</p>
+      <div class="social-icons">
+        <a href="https://instagram.com/sexoterapiaok" target="_blank" class="social-link-btn">@sexoterapiaok</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: var(--white);
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .tag {
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h2 {
+    font-size: 3rem;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-bottom: 6rem;
+  }
+
+  .testimonial-card {
+    background: var(--background);
+    padding: 3.5rem 2.5rem;
+    border-radius: 35px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: var(--transition);
+    border: 1px solid rgba(0,0,0,0.02);
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+    border-color: var(--gold);
+    background: var(--white);
+  }
+
+  .quote-icon {
+    font-size: 6rem;
+    color: var(--primary);
+    opacity: 0.15;
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonial-footer strong {
+    display: block;
+    color: var(--text);
+    font-size: 1.1rem;
+  }
+
+  .testimonial-footer span {
+    font-size: 0.95rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .social-cta {
+    text-align: center;
+    padding: 4.5rem;
+    border-radius: 40px;
+    color: var(--white);
+    background: var(--gradient);
+    border: 1px solid var(--gold);
+    box-shadow: 0 15px 40px rgba(159, 5, 0, 0.3);
+  }
+
+  .social-cta h3 {
+    margin-bottom: 1rem;
+    color: var(--white);
+    font-size: 2.2rem;
+  }
+
+  .social-cta p {
+    font-size: 1.15rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+  }
+
+  .social-link-btn {
+    display: inline-block;
+    padding: 1.2rem 3rem;
+    background: var(--white);
+    color: var(--primary-dark);
+    font-weight: 800;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    transition: var(--transition);
+  }
+
+  .social-link-btn:hover {
+    transform: scale(1.05);
+    background: var(--accent);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  }
+</style>

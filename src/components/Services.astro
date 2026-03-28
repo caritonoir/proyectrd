@@ -1,0 +1,222 @@
+---
+const services = [
+  {
+    title: "Sexoterapia Clínica",
+    description:
+      "Abordaje profesional de disfunciones, ansiedad sexual y mejora del placer desde una perspectiva TCC.",
+    icon: "❤️",
+  },
+  {
+    title: "ESI y Vínculos",
+    description:
+      "Asesoramiento en educación sexual integral, diversidad de género y gestión de relaciones no monógamas.",
+    icon: "🤝",
+  },
+  {
+    title: "Identidad y Género",
+    description:
+      "Acompañamiento en procesos de transición, autoafirmación y exploración de la identidad LGBTIQA+.",
+    icon: "🏳️‍🌈",
+  },
+  {
+    title: "Terapia de Pareja",
+    description:
+      "Herramientas para mejorar la comunicación, resolver conflictos y redescubrir la intimidad en el vínculo.",
+    icon: "💑",
+  },
+];
+---
+
+<section id="servicios" class="section services">
+  <div class="services-bg-logo" id="parallax-logo">
+    <img src="/images/logoDorado.png" alt="" class="bg-logo-img" />
+  </div>
+  <div class="container fade-in">
+    <div class="section-header">
+      <span class="tag">Nuestros Servicios</span>
+      <h2>Especialidades y Atención</h2>
+      <p>
+        Ofrecemos diferentes modalidades de atención presencial y virtual
+        adaptadas a tu proceso personal.
+      </p>
+    </div>
+    <div class="services-grid">
+      {
+        services.map((service) => (
+          <div class="service-card">
+            <div class="service-icon glass-red">{service.icon}</div>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <div class="card-footer">
+              <a href="#contacto" class="link">
+                Consultar →
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--background);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services-bg-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.1; /* Opacidad base un poco más alta */
+    filter: saturate(0.5) brightness(0.8); /* Ajuste para que se vea mejor en Light Mode */
+    transition: var(--transition);
+  }
+
+  [data-theme="dark"] .services-bg-logo {
+    opacity: 0.08;
+    filter: brightness(1.2) contrast(1.1); /* Brillo para que destaque en Dark Mode */
+  }
+
+  .bg-logo-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .tag {
+    color: var(--tag-color);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--heading-color);
+  }
+
+  .section-header p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    max-width: 650px;
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .service-card {
+    background: var(--white);
+    padding: 3rem 2rem;
+    border-radius: 30px;
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  }
+
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+    border-color: var(--gold);
+    background: var(--white);
+  }
+
+  .glass-red {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    background: var(--gradient);
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 20px rgba(159, 5, 0, 0.2);
+    border: 1px solid var(--gold);
+  }
+
+  [data-theme="dark"] .glass-red {
+    background: var(--white); /* Matches card background in dark mode */
+    box-shadow: none;
+  }
+
+  h3 {
+    margin-bottom: 1.2rem;
+    font-size: 1.6rem;
+    color: var(--text);
+  }
+
+  .service-card p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .link {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  .link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+<script is:inline>
+  function initParallax() {
+    if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to("#parallax-logo", {
+        y: "30%", // Movimiento sutil hacia abajo
+        scale: 1.15, // Ligero aumento de tamaño
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".services",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.5, // Suavizado del movimiento
+        },
+      });
+    }
+  }
+
+  // Inicializar al cargar
+  document.addEventListener("DOMContentLoaded", initParallax);
+
+  // Opcional: Re-inicializar si usas ViewTransitions de Astro
+  document.addEventListener("astro:page-load", initParallax);
+</script>
