@@ -1,28 +1,34 @@
 ---
 const services = [
   {
-    title: "Sexoterapia Clínica",
+    title: "Psicoterapia",
     description:
-      "Abordaje profesional de disfunciones, ansiedad sexual y mejora del placer desde una perspectiva TCC.",
-    icon: "❤️",
+      "Un acompañamiento de lo que te pasa a partir de indentificar pensamientos, emociones y conductas que hoy te generan malestar para construir nuevas formas de afrontarlo desde un enfoque cognitivo-conductual.",
+    // icon: "❤️",
   },
   {
-    title: "ESI y Vínculos",
+    title: "Sexoterapia",
     description:
-      "Asesoramiento en educación sexual integral, diversidad de género y gestión de relaciones no monógamas.",
-    icon: "🤝",
-  },
-  {
-    title: "Identidad y Género",
-    description:
-      "Acompañamiento en procesos de transición, autoafirmación y exploración de la identidad LGBTIQA+.",
-    icon: "🏳️‍🌈",
+      "Un espacio seguro y lubre de juicios para explorar tu sexualidad, comprender tus deseos e inseguridades. Integraremos aspectos de lo emocional, cognitivo y corporal para poder construir una relación más sana con vos mismo, el cuerpo y el placer.",
+    // icon: "❤️",
   },
   {
     title: "Terapia de Pareja",
     description:
-      "Herramientas para mejorar la comunicación, resolver conflictos y redescubrir la intimidad en el vínculo.",
-    icon: "💑",
+      "Un lugar de encuentro donde poder aprender a escucharse, comprenderse y reconstruir o redescubrir el vinculo. Se identifican patrones y se trabajan conflictos, comunicación, sexualidad o expectativas brindando herramientas para fortalecer la relación dia a dia.",
+    // icon: "💑",
+  },
+  {
+    title: "Talleres de ESI",
+    description:
+      "Con asesoramiento a familias, empresas, instituciones o particulares, los talleres se orientan a brindar herramientas sobre temas como emociones, vinculos, consentimiento, identidad, diversidad y autocuidado promoviendo el pensamiento critico y el bienestar en distintas edades desde una mirada integral e inclusiva basada en el respeto.",
+    // icon: "🤝",
+  },
+  {
+    title: "Eventos y charlas",
+    description:
+      "Espacios de intercambio, divulgación y aprendizaje sobre salud mental y sexualidad donde se abordan temas desde una perspectiva accesible, reflexiva y sin tabúes buscando generar conciencia, derribar mitos y acercar herramientas prácticas para implementar en el dia a dia.",
+    // icon: "🏳️‍🌈",
   },
 ];
 ---
@@ -33,10 +39,10 @@ const services = [
   </div>
   <div class="container fade-in">
     <div class="section-header">
-      <span class="tag">Nuestros Servicios</span>
-      <h2>Especialidades y Atención</h2>
+      <span class="tag">Mis servicios</span>
+      <h2>Especialidades</h2>
       <p>
-        Ofrecemos diferentes modalidades de atención presencial y virtual
+        Ofrezco diferentes modalidades de atención presencial y virtual
         adaptadas a tu proceso personal.
       </p>
     </div>
@@ -44,7 +50,7 @@ const services = [
       {
         services.map((service) => (
           <div class="service-card">
-            <div class="service-icon glass-red">{service.icon}</div>
+            {/* <div class="service-icon glass-red">{service.icon}</div> */}
             <h3>{service.title}</h3>
             <p>{service.description}</p>
             <div class="card-footer">

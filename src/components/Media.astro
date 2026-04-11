@@ -1,54 +1,65 @@
 ---
 const mediaItems = [
   {
-    type: 'Podcast',
-    title: 'Sexoterapia en tu oído',
-    description: 'Explorando la sexualidad con profesionalismo, ciencia y humor. Todo lo que quieres saber y no te animas a preguntar.',
-    link: '#',
-    icon: '🎙️'
+    type: "Podcast",
+    title: "Sexoterapia en tu oído",
+    description:
+      "Explorando la sexualidad con profesionalismo, ciencia y humor. Todo lo que quieres saber y no te animas a preguntar.",
+    link: "https://open.spotify.com/show/5BMmMKpkxAw702wiCx4SOE?si=A-cm--ULRKKoIV35-HTa4Q",
+    icon: "🎙️",
   },
   {
-    type: 'Marca',
-    title: 'Lubriq SexShop',
-    description: 'Nuestra marca de productos seleccionados para mejorar tu placer con el asesoramiento adecuado.',
-    link: '#',
-    icon: '✨'
+    type: "Marca",
+    title: "Lubriq SexShop",
+    description:
+      "Nuestra marca de productos seleccionados para mejorar tu placer con el asesoramiento adecuado.",
+    link: "https://tiendalubriq.com",
+    icon: "✨",
   },
   {
-    type: 'Video / Reel',
-    title: 'ESI en 1 Minuto',
-    description: 'Contenido rápido y efectivo sobre educación sexual integral para todas las edades en @sexoterapiaok.',
-    link: 'https://instagram.com/sexoterapiaok',
-    icon: '🎥'
+    type: "Video / Reel",
+    title: "ESI en 1 Minuto",
+    description:
+      "Contenido rápido y efectivo sobre educación sexual integral para todas las edades en @sexoterapiaok.",
+    link: "https://instagram.com/sexoterapiaok",
+    icon: "🎥",
   },
   {
-    type: 'Blog / Notas',
-    title: 'Relaciones No Monógamas',
-    description: 'Artículos y reflexiones sobre la construcción de vínculos diversos y honestos.',
-    link: '#',
-    icon: '📝'
-  }
+    type: "Blog / Notas",
+    title: "Relaciones No Monógamas",
+    description:
+      "Artículos y reflexiones sobre la construcción de vínculos diversos y honestos.",
+    link: "https://www.youtube.com/watch?v=jgOkasiPQbU&authuser=0",
+    icon: "📝",
+  },
 ];
 ---
+
 <section id="media" class="section media">
   <div class="container fade-in">
     <div class="section-header">
       <span class="tag">Contenido</span>
-      <h2>Recursos y Divulgación</h2>
-      <p>Espacios donde compartimos información para desestigmatizar la sexualidad y fomentar el bienestar.</p>
+      <h2>Mis redes sociales</h2>
+      <p>
+        Sexoterapia es un conjunto de distintas experiencias: elegí la
+        plataforma que mas te guste para conocer lo que hago junto a colegas
+        invitados y contenido o recursos gratuitos.
+      </p>
     </div>
     <div class="media-grid">
-      {mediaItems.map(item => (
-        <a href={item.link} class="media-card gold-border">
-          <div class="media-icon">{item.icon}</div>
-          <div class="media-info">
-            <span class="media-type">{item.type}</span>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-            <span class="read-more">Ver contenido →</span>
-          </div>
-        </a>
-      ))}
+      {
+        mediaItems.map((item) => (
+          <a href={item.link} class="media-card gold-border">
+            <div class="media-icon">{item.icon}</div>
+            <div class="media-info">
+              <span class="media-type">{item.type}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              <span class="read-more">Ver contenido →</span>
+            </div>
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -99,7 +110,7 @@ const mediaItems = [
     text-decoration: none;
     color: var(--text);
     background: var(--white);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
   }
 
   .media-card:hover {

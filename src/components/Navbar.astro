@@ -23,7 +23,7 @@ import ThemeToggle from "./ThemeToggle.astro";
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#sobre-mi">Sobre Mí</a></li>
-      <li><a href="#media">Media</a></li>
+      <li><a href="#media">Redes</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
     <div class="nav-actions">
@@ -44,37 +44,37 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 <script is:inline>
   function initMobileMenu() {
-    const toggle = document.getElementById('mobile-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const navActions = document.querySelector('.nav-actions');
+    const toggle = document.getElementById("mobile-toggle");
+    const navLinks = document.querySelector(".nav-links");
+    const navActions = document.querySelector(".nav-actions");
 
     if (!toggle || !navLinks || !navActions) return;
 
     // Reset before adding
-    toggle.classList.remove('active');
-    navLinks.classList.remove('active');
-    navActions.classList.remove('active');
+    toggle.classList.remove("active");
+    navLinks.classList.remove("active");
+    navActions.classList.remove("active");
 
     toggle.onclick = () => {
-      navLinks.classList.toggle('active');
-      navActions.classList.toggle('active');
-      toggle.classList.toggle('active');
+      navLinks.classList.toggle("active");
+      navActions.classList.toggle("active");
+      toggle.classList.toggle("active");
     };
 
     // Close menu when clicking a link
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    document.querySelectorAll(".nav-links a").forEach((link) => {
       link.onclick = () => {
-        navLinks.classList.remove('active');
-        navActions.classList.remove('active');
-        toggle.classList.remove('active');
+        navLinks.classList.remove("active");
+        navActions.classList.remove("active");
+        toggle.classList.remove("active");
       };
     });
   }
 
   // Initialize on load
-  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  document.addEventListener("DOMContentLoaded", initMobileMenu);
   // Also for Astro view transitions if used
-  document.addEventListener('astro:page-load', initMobileMenu);
+  document.addEventListener("astro:page-load", initMobileMenu);
 </script>
 
 <style>
@@ -185,7 +185,7 @@ import ThemeToggle from "./ThemeToggle.astro";
       justify-content: center;
       align-items: center;
       gap: 2.5rem;
-      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
       z-index: 1000;
       padding: 2rem;
     }
@@ -226,8 +226,12 @@ import ThemeToggle from "./ThemeToggle.astro";
 
   /* FORCED: Red button in dark mode as requested */
   :global([data-theme="dark"]) .nav-cta .btn-primary {
-    background: linear-gradient(to right bottom, rgb(76, 3, 0), rgb(159, 5, 0)) !important;
-    color: #FFFFFF !important;
+    background: linear-gradient(
+      to right bottom,
+      rgb(76, 3, 0),
+      rgb(159, 5, 0)
+    ) !important;
+    color: #ffffff !important;
     box-shadow: 0 4px 15px rgba(159, 5, 0, 0.3) !important;
   }
 </style>

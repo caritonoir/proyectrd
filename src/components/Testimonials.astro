@@ -1,46 +1,53 @@
 ---
 const testimonials = [
   {
-    name: 'M. García',
-    text: 'Encontrar un espacio tan respetuoso y libre de prejuicios fue clave para mi proceso personal. Recomiendo totalmente a Santiago.',
-    role: 'Terapia Individual'
+    name: "M. García",
+    text: "Encontrar un espacio tan respetuoso y libre de prejuicios fue clave para mi proceso personal. Recomiendo totalmente a Santiago.",
+    role: "Terapia Individual",
   },
   {
-    name: 'Vínculo Diverso',
-    text: 'Nos ayudó a navegar las dudas sobre la apertura del vínculo con herramientas claras y mucha empatía.',
-    role: 'Terapia de Pareja'
+    name: "Vínculo Diverso",
+    text: "Nos ayudó a navegar las dudas sobre la apertura del vínculo con herramientas claras y mucha empatía.",
+    role: "Terapia de Pareja",
   },
   {
-    name: 'Juan Pérez',
-    text: 'Su enfoque sobre género y diversidad me permitió sentirme validado y escuchado por primera vez en un espacio clínico.',
-    role: 'Terapia Individual'
-  }
+    name: "Juan Pérez",
+    text: "Su enfoque sobre género y diversidad me permitió sentirme validado y escuchado por primera vez en un espacio clínico.",
+    role: "Terapia Individual",
+  },
 ];
 ---
+
 <section id="testimonios" class="section testimonials">
   <div class="container fade-in">
     <div class="section-header">
       <span class="tag">Opiniones</span>
-      <h2>Testimonios Reales</h2>
-      <p>Lo que dicen quienes han transitado sus procesos de transformación y aprendizaje con nosotros.</p>
+      <h2>Testimonios</h2>
+      <p>¿Qué opinan algunos/as de mis ex consultantes acerca de mi trabajo?</p>
     </div>
     <div class="testimonials-grid">
-      {testimonials.map(t => (
-        <div class="testimonial-card">
-          <div class="quote-icon">“</div>
-          <p class="testimonial-text">{t.text}</p>
-          <div class="testimonial-footer">
-            <strong>{t.name}</strong>
-            <span>{t.role}</span>
+      {
+        testimonials.map((t) => (
+          <div class="testimonial-card">
+            <div class="quote-icon">“</div>
+            <p class="testimonial-text">{t.text}</p>
+            <div class="testimonial-footer">
+              <strong>{t.name}</strong>
+              <span>{t.role}</span>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
     <div class="social-cta glass-dark">
       <h3>Síguenos para más información</h3>
       <p>Contenido diario sobre sexualidad, ESI y bienestar emocional.</p>
       <div class="social-icons">
-        <a href="https://instagram.com/sexoterapiaok" target="_blank" class="social-link-btn">@sexoterapiaok</a>
+        <a
+          href="https://instagram.com/sexoterapiaok"
+          target="_blank"
+          class="social-link-btn">@sexoterapiaok</a
+        >
       </div>
     </div>
   </div>
@@ -88,9 +95,9 @@ const testimonials = [
     padding: 3.5rem 2.5rem;
     border-radius: 35px;
     position: relative;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     transition: var(--transition);
-    border: 1px solid rgba(0,0,0,0.02);
+    border: 1px solid rgba(0, 0, 0, 0.02);
   }
 
   .testimonial-card:hover {
@@ -107,7 +114,7 @@ const testimonials = [
     position: absolute;
     top: 1rem;
     left: 2rem;
-    font-family: 'Outfit', sans-serif;
+    font-family: "Outfit", sans-serif;
   }
 
   .testimonial-text {
@@ -168,6 +175,6 @@ const testimonials = [
   .social-link-btn:hover {
     transform: scale(1.05);
     background: var(--accent);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   }
 </style>

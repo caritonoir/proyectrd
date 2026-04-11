@@ -6,44 +6,76 @@
   <div class="container fade-in">
     <div class="about-wrapper">
       <div class="about-image">
-        <img
-          src="/images/IMG_0013.jpeg"
-          alt="Santiago Ruiz Diaz"
-          class="gold-border"
-        />
-        <div class="experience-badge">
-          <span>4+</span>
-          <p>Años en Clínica</p>
+        <div class="image-container">
+          <img
+            src="/images/IMG_0013.jpeg"
+            alt="Santiago Ruiz Diaz"
+            class="gold-border"
+          />
+          <div class="experience-badge">
+            <span>5+</span>
+            <p>Años en Clínica</p>
+          </div>
         </div>
-      </div>
-      <div class="about-content">
-        <span class="brand-tag">Sobre Mí</span>
-        <h2>Santiago Ruiz Diaz</h2>
-        <p>
-          Tengo 30 años y trabajo en la clínica hace 4 años desde una
-          perspectiva teórico cognitivo-conductual (TCC).
-        </p>
-        <p>
-          Desde febrero del 2020 creo y divulgo información sobre sexualidad,
-          ESI, género, LGBTIQA+ y relaciones no monógamas en mis redes sociales
-          bajo el nombre de <strong>@sexoterapiaok</strong>.
-        </p>
-        <p>
-          En 2024 creé la marca <strong>Lubriq</strong>, un SexShop diseñado
-          para brindarte un asesoramiento completo a la hora de elegir tu
-          producto ideal.
-        </p>
         <ul class="trajectory-list">
           <li>
             <strong>Formación:</strong> Licenciado en Psicología
           </li>
           <li>
-            <strong>Especialidad:</strong> Perspectiva TCC, Sexualidad y Género
+            <strong>Especialidad:</strong> Perspectiva TCC, vinculaciones no monógamas
+            y de género
+            <a
+              href="https://relacionesabiertas.org/perfil-santiago-ruiz-diaz"
+              target="_blank"
+              class="external-link"
+            >
+              <i class="bi bi-box-arrow-up-right"></i></a
+            >
           </li>
           <li>
-            <strong>Emprendimiento:</strong> Fundador de Lubriq
+            <strong>Emprendimiento:</strong> Co-fundador de <a
+              href="https://tiendalubriq.com"
+              target="_blank"
+              class="external-link"
+              >Lubriq <i class="bi bi-box-arrow-up-right"></i></a
+            >
           </li>
         </ul>
+      </div>
+      <div class="about-content">
+        <span class="brand-tag">Sobre Mí</span>
+        <h2>Santiago Ruiz Diaz</h2>
+        <p>
+          Soy psicólogo formado en la Universidad de Buenos Aires (UBA), tengo
+          30 años y cuento con 5 años de experiencia acompañando a personas en
+          sus procesos terapéuticos. Trabajo desde un enfoque
+          cognitivo-conductual, lo que me permite brindar herramientas prácticas
+          y basadas en evidencia para abordar distintas problemáticas y generar
+          cambios reales en la vida cotidiana de mis pacientes.
+        </p>
+        <p>
+          A lo largo de mi recorrido, fui integrando la psicología con la
+          sexología, entendiendo la importancia de abordar la salud emocional y
+          la sexualidad de manera conjunta, sin tabúes y desde una perspectiva
+          inclusiva. Además, creo contenido de divulgación en redes sociales
+          donde comparto información sobre sexualidad, género, modelos de
+          vinculación, y Educación Sexual Integral (ESI), con el objetivo de
+          acercar estos temas de forma clara y accesible a todos/as por igual.
+        </p>
+        <p>
+          También soy creador de <strong>Lubriq</strong>, un emprendimiento que
+          surge desde el interés por promover el bienestar sexual y seguir
+          ampliando el acceso a recursos que acompañen el autoconocimiento y el
+          placer.
+        </p>
+        <p>
+          Mi objetivo como profesional es ofrecer un espacio seguro, donde cada
+          persona pueda sentirse escuchada, comprendida y acompañada en su
+          proceso. Busco que quienes consultan no solo encuentren contención,
+          sino también herramientas concretas que puedan aplicar en su vida
+          diaria para mejorar su bienestar y construir una vida o hábitos más
+          plenos.
+        </p>
         <div class="about-actions">
           <a href="#contacto" class="btn btn-primary">Conozcámonos</a>
           <a
@@ -66,34 +98,41 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5rem;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .about-image {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image-container {
     position: relative;
+    width: 100%;
   }
 
   .about-image img {
     border-radius: 40px;
     box-shadow: var(--shadow);
     width: 100%;
-    max-height: 550px; /* Limits the height to prevent stretching the section */
-    object-fit: cover; /* Ensures the image fills the area without distortion */
+    max-height: 550px;
+    object-fit: cover;
     object-position: center;
   }
 
   .experience-badge {
     position: absolute;
-    bottom: -15px;
-    right: -15px;
+    bottom: 20px;
+    right: 20px;
     background: var(--gradient);
     color: var(--white);
-    padding: 1.5rem;
-    border-radius: 25px;
+    padding: 1.2rem;
+    border-radius: 20px;
     text-align: center;
     box-shadow: var(--shadow);
     border: 1px solid var(--gold);
-    min-width: 140px;
+    min-width: 120px;
+    z-index: 10;
   }
 
   [data-theme="dark"] .experience-badge {
@@ -132,11 +171,12 @@
   }
 
   .trajectory-list {
-    margin-bottom: 3rem;
+    margin-top: 2.5rem;
     background: var(--background);
     padding: 2rem;
     border-radius: 20px;
     border-left: 4px solid var(--primary);
+    width: 100%;
   }
 
   [data-theme="dark"] .trajectory-list {
@@ -150,6 +190,29 @@
     padding-left: 1.5rem;
     position: relative;
     color: var(--text);
+  }
+
+  .external-link {
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+
+  .external-link:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  .external-link i {
+    font-size: 0.8rem;
+  }
+
+  [data-theme="dark"] .external-link {
+    color: var(--gold);
   }
 
   .trajectory-list li:last-child {
@@ -177,6 +240,11 @@
   .btn-outline {
     border: 2px solid var(--primary);
     color: var(--primary);
+  }
+
+  .btn-outline:hover {
+    background: var(--gradient);
+    color: var(--white);
   }
 
   [data-theme="dark"] .btn-primary {
