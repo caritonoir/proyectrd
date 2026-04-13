@@ -1,27 +1,29 @@
 import { google } from 'googleapis';
 
-/**
- * Función que recibe las credenciales directamente para evitar problemas de contexto
- * en entornos de construcción como Netlify/Vercel.
- */
 export async function getArticlesFromDrive(clientEmail, privateKey, folderId) {
   try {
     if (!clientEmail || !privateKey || !folderId) {
-      console.warn('Faltan credenciales para Google Drive');
       return [];
     }
 
-    // Limpieza de la llave para asegurar formato PEM
-    const body = privateKey
-      .replace(/-----BEGIN PRIVATE KEY-----/, '')
-      .replace(/-----END PRIVATE KEY-----/, '')
-      .replace(/\\n/g, '')
-      .replace(/\\+n/g, '')
-      .replace(/\s+/g, '')
-      .replace(/"/g, '')
-      .trim();
+    // LIMPIEZA QUIRÚRGICA PARA NETLIFY:
+    // 1. Quitamos comillas extremas si existen
+    let cleanKey = privateKey.trim().replace(/^"(.*)"$/, '$1');
 
-    const cleanKey = `-----BEGIN PRIVATE KEY-----\n${body}\n-----END PRIVATE KEY-----`;
+    // 2. Si la llave parece estar escapada como un string de JSON (muy común en Netlify),
+    // la parseamos para que JS resuelva los \n automáticamente.
+    if (cleanKey.includes('\\n')) {
+      try {
+        // Intentamos parsear como JSON para resolver escapes
+        cleanKey = JSON.parse(`"${cleanKey}"`);
+      } catch (e) {
+        // Fallback si el parse falla
+        cleanKey = cleanKey.replace(/\\n/g, '\n');
+      }
+    }
+
+    // 3. Limpieza final de espacios y retornos de carro
+    cleanKey = cleanKey.replace(/\r/g, '').trim();
 
     const auth = new google.auth.GoogleAuth({
       credentials: {
@@ -44,7 +46,7 @@ export async function getArticlesFromDrive(clientEmail, privateKey, folderId) {
     const folders = folderResponse.data.files || [];
     let allArticles = [];
 
-    // 2. Obtener archivos por categoría
+    // 2. Obtener archivos
     for (const folder of folders) {
       const filesResponse = await drive.files.list({
         q: `'${folder.id}' in parents and trashed = false`,
@@ -69,7 +71,7 @@ export async function getArticlesFromDrive(clientEmail, privateKey, folderId) {
 
     return allArticles;
   } catch (error) {
-    console.error('Error en getArticlesFromDrive:', error.message);
-    return [];
+    // Lanzamos el error original para que sea visible en el build de Astro/Netlify
+    throw new Error(`Google Drive API Error: ${error.message}`);
   }
 }
