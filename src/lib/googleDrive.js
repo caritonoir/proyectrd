@@ -10,7 +10,7 @@ export async function getArticlesFromDrive() {
     // 1. Intentar cargar desde el archivo JSON (Local)
     if (fs.existsSync(keyPath)) {
       credentials = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
-    } 
+    }
     // 2. Fallback: Reconstruir desde variables de entorno (Producción/CI)
     else {
       const clientEmail = process.env.GDRIVE_CLIENT_EMAIL || import.meta.env.GDRIVE_CLIENT_EMAIL;
@@ -23,8 +23,8 @@ export async function getArticlesFromDrive() {
 
       credentials = {
         client_email: clientEmail,
-        // Limpiamos la llave por si viene con \n literales desde el panel de control del hosting
-        private_key: privateKey.replace(/\\n/g, '\n').replace(/"/g, '').trim(),
+        // Limpiamos la llave con regex agresiva para manejar cualquier tipo de escape (\n, \\n, etc) que el hosting inyecte
+        private_key: privateKey.replace(/\\+n/g, '\n').replace(/"/g, '').trim(),
       };
     }
 
