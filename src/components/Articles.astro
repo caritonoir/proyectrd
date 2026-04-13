@@ -20,15 +20,19 @@ if (fs.existsSync(keyPath)) {
   folderId = import.meta.env.GDRIVE_FOLDER_ID || process.env.GDRIVE_FOLDER_ID;
 }
 
-// Log detallado para Debug en Netlify (esto saldrá en el Deploy Log)
-console.log('Build Debug:', {
-  hasEmail: !!clientEmail,
-  hasKey: !!privateKey,
-  hasFolder: !!folderId,
-  keyLength: privateKey?.length || 0
-});
+// FORZAR ERROR SI FALTA ALGO (Para ver en los logs de Netlify)
+if (!clientEmail || !privateKey || !folderId) {
+  throw new Error(`ERROR DE CONSTRUCCION: Faltan variables de entorno. Email: ${!!clientEmail}, Key: ${!!privateKey}, Folder: ${!!folderId}`);
+}
 
 const allArticlesFromDrive = await getArticlesFromDrive(clientEmail, privateKey, folderId);
+
+if (!allArticlesFromDrive || allArticlesFromDrive.length === 0) {
+  // Solo lanzamos error si no es modo desarrollo
+  if (import.meta.env.PROD) {
+    throw new Error('ERROR DE CONSTRUCCION: No se pudieron obtener artículos de Google Drive. Revisa los permisos de la carpeta y la API.');
+  }
+}
 
 // Fallback for development if Drive is empty or not connected
 const fallbackArticles = [
