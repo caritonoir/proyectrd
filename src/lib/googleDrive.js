@@ -1,56 +1,39 @@
 import { google } from 'googleapis';
-import fs from 'node:fs';
-import path from 'node:path';
 
-export async function getArticlesFromDrive() {
+/**
+ * Función que recibe las credenciales directamente para evitar problemas de contexto
+ * en entornos de construcción como Netlify/Vercel.
+ */
+export async function getArticlesFromDrive(clientEmail, privateKey, folderId) {
   try {
-    let credentials;
-    const keyPath = path.resolve(process.cwd(), 'gdrive-key.json');
-
-    // 1. Local: Intenta leer el archivo
-    if (fs.existsSync(keyPath)) {
-      credentials = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
-    } 
-    // 2. Producción (Astro Build): Lee variables de entorno
-    else {
-      // Intentamos ambos métodos de lectura de variables
-      const clientEmail = import.meta.env.GDRIVE_CLIENT_EMAIL || process.env.GDRIVE_CLIENT_EMAIL;
-      let privateKey = import.meta.env.GDRIVE_PRIVATE_KEY || process.env.GDRIVE_PRIVATE_KEY;
-
-      if (!clientEmail || !privateKey) {
-        return [];
-      }
-
-      // LIMPIEZA ABSOLUTA DE LA LLAVE:
-      // Removemos cabeceras, pies, comillas y TODO el espacio en blanco (incluyendo \n y \\n)
-      // para quedarnos con el bloque base64 puro y reconstruirlo limpiamente.
-      const body = privateKey
-        .replace(/-----BEGIN PRIVATE KEY-----/, '')
-        .replace(/-----END PRIVATE KEY-----/, '')
-        .replace(/\\n/g, '')
-        .replace(/\\+n/g, '')
-        .replace(/\s+/g, '')
-        .replace(/"/g, '')
-        .trim();
-
-      credentials = {
-        client_email: clientEmail,
-        private_key: `-----BEGIN PRIVATE KEY-----\n${body}\n-----END PRIVATE KEY-----`,
-      };
+    if (!clientEmail || !privateKey || !folderId) {
+      console.warn('Faltan credenciales para Google Drive');
+      return [];
     }
 
-    const folderId = import.meta.env.GDRIVE_FOLDER_ID || process.env.GDRIVE_FOLDER_ID;
+    // Limpieza de la llave para asegurar formato PEM
+    const body = privateKey
+      .replace(/-----BEGIN PRIVATE KEY-----/, '')
+      .replace(/-----END PRIVATE KEY-----/, '')
+      .replace(/\\n/g, '')
+      .replace(/\\+n/g, '')
+      .replace(/\s+/g, '')
+      .replace(/"/g, '')
+      .trim();
 
-    if (!folderId) return [];
+    const cleanKey = `-----BEGIN PRIVATE KEY-----\n${body}\n-----END PRIVATE KEY-----`;
 
     const auth = new google.auth.GoogleAuth({
-      credentials,
+      credentials: {
+        client_email: clientEmail,
+        private_key: cleanKey,
+      },
       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
     });
 
     const drive = google.drive({ version: 'v3', auth });
 
-    // 1. Carpetas
+    // 1. Obtener categorías
     const folderResponse = await drive.files.list({
       q: `'${folderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
       fields: 'files(id, name)',
@@ -61,7 +44,7 @@ export async function getArticlesFromDrive() {
     const folders = folderResponse.data.files || [];
     let allArticles = [];
 
-    // 2. Archivos
+    // 2. Obtener archivos por categoría
     for (const folder of folders) {
       const filesResponse = await drive.files.list({
         q: `'${folder.id}' in parents and trashed = false`,
@@ -86,7 +69,7 @@ export async function getArticlesFromDrive() {
 
     return allArticles;
   } catch (error) {
-    console.error('Error Drive:', error.message);
+    console.error('Error en getArticlesFromDrive:', error.message);
     return [];
   }
 }

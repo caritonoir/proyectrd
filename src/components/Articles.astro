@@ -1,7 +1,26 @@
 ---
 import { getArticlesFromDrive } from "../lib/googleDrive";
+import fs from 'node:fs';
+import path from 'node:path';
 
-const allArticlesFromDrive = await getArticlesFromDrive();
+// 1. Obtener credenciales (Astro las inyecta aquí durante el build)
+let clientEmail, privateKey, folderId;
+
+// Intentar localmente primero (para desarrollo)
+const keyPath = path.resolve(process.cwd(), 'gdrive-key.json');
+if (fs.existsSync(keyPath)) {
+  const creds = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
+  clientEmail = creds.client_email;
+  privateKey = creds.private_key;
+  folderId = import.meta.env.GDRIVE_FOLDER_ID; // El ID lo seguimos sacando del env
+} else {
+  // Producción (Netlify)
+  clientEmail = import.meta.env.GDRIVE_CLIENT_EMAIL;
+  privateKey = import.meta.env.GDRIVE_PRIVATE_KEY;
+  folderId = import.meta.env.GDRIVE_FOLDER_ID;
+}
+
+const allArticlesFromDrive = await getArticlesFromDrive(clientEmail, privateKey, folderId);
 
 // Fallback for development if Drive is empty or not connected
 const fallbackArticles = [
