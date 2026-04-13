@@ -4,16 +4,36 @@ import path from 'node:path';
 
 export async function getArticlesFromDrive() {
   try {
-    // Usar el archivo JSON directamente para evitar problemas de formato en el .env
+    let credentials;
     const keyPath = path.resolve(process.cwd(), 'gdrive-key.json');
-    const folderId = process.env.GDRIVE_FOLDER_ID || import.meta.env.GDRIVE_FOLDER_ID;
 
-    if (!fs.existsSync(keyPath)) {
-      console.warn('Archivo gdrive-key.json no encontrado');
-      return [];
+    // 1. Intentar cargar desde el archivo JSON (Local)
+    if (fs.existsSync(keyPath)) {
+      credentials = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
+    } 
+    // 2. Fallback: Reconstruir desde variables de entorno (Producción/CI)
+    else {
+      const clientEmail = process.env.GDRIVE_CLIENT_EMAIL || import.meta.env.GDRIVE_CLIENT_EMAIL;
+      const privateKey = process.env.GDRIVE_PRIVATE_KEY || import.meta.env.GDRIVE_PRIVATE_KEY;
+
+      if (!clientEmail || !privateKey) {
+        console.warn('Credenciales de Google Drive no encontradas en archivo ni en variables de entorno');
+        return [];
+      }
+
+      credentials = {
+        client_email: clientEmail,
+        // Limpiamos la llave por si viene con \n literales desde el panel de control del hosting
+        private_key: privateKey.replace(/\\n/g, '\n').replace(/"/g, '').trim(),
+      };
     }
 
-    const credentials = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
+    const folderId = process.env.GDRIVE_FOLDER_ID || import.meta.env.GDRIVE_FOLDER_ID;
+
+    if (!folderId) {
+      console.warn('GDRIVE_FOLDER_ID no definido');
+      return [];
+    }
 
     const auth = new google.auth.GoogleAuth({
       credentials,
@@ -58,11 +78,7 @@ export async function getArticlesFromDrive() {
 
     return allArticles;
   } catch (error) {
-    if (error.code === 403) {
-      console.error('Error 403: Permiso denegado. Asegúrate de que la API de Google Drive esté HABILITADA en la consola de Google Cloud.');
-    } else {
-      console.error('Drive Error:', error.message);
-    }
+    console.error('Drive Error:', error.message);
     return [];
   }
 }
