@@ -3,29 +3,26 @@ import { getArticlesFromDrive } from "../lib/googleDrive";
 import fs from 'node:fs';
 import path from 'node:path';
 
-// 1. Obtener credenciales (Astro las inyecta aquí durante el build)
-let clientEmail, privateKey, folderId;
+// 1. Obtener credenciales (JSON completo para evitar errores de formato)
+let credentialsJSON, folderId;
 
-// Intentar localmente primero (para desarrollo)
+// Intentar localmente primero
 const keyPath = path.resolve(process.cwd(), 'gdrive-key.json');
 if (fs.existsSync(keyPath)) {
-  const creds = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
-  clientEmail = creds.client_email;
-  privateKey = creds.private_key;
-  folderId = import.meta.env.GDRIVE_FOLDER_ID; // El ID lo seguimos sacando del env
+  credentialsJSON = fs.readFileSync(keyPath, 'utf8');
 } else {
-// Producción (Netlify) con triple redundancia
-  clientEmail = import.meta.env.GDRIVE_CLIENT_EMAIL || process.env.GDRIVE_CLIENT_EMAIL;
-  privateKey = import.meta.env.GDRIVE_PRIVATE_KEY || process.env.GDRIVE_PRIVATE_KEY;
-  folderId = import.meta.env.GDRIVE_FOLDER_ID || process.env.GDRIVE_FOLDER_ID;
+  // Producción (Netlify)
+  credentialsJSON = import.meta.env.GDRIVE_JSON || process.env.GDRIVE_JSON;
 }
 
-// FORZAR ERROR SI FALTA ALGO (Para ver en los logs de Netlify)
-if (!clientEmail || !privateKey || !folderId) {
-  throw new Error(`ERROR DE CONSTRUCCION: Faltan variables de entorno. Email: ${!!clientEmail}, Key: ${!!privateKey}, Folder: ${!!folderId}`);
+folderId = import.meta.env.GDRIVE_FOLDER_ID || process.env.GDRIVE_FOLDER_ID;
+
+// Forzar error descriptivo si falta el JSON
+if (!credentialsJSON && import.meta.env.PROD) {
+  throw new Error("ERROR DE CONSTRUCCION: Falta la variable GDRIVE_JSON en Netlify.");
 }
 
-const allArticlesFromDrive = await getArticlesFromDrive(clientEmail, privateKey, folderId);
+const allArticlesFromDrive = await getArticlesFromDrive(credentialsJSON, folderId);
 
 if (!allArticlesFromDrive || allArticlesFromDrive.length === 0) {
   // Solo lanzamos error si no es modo desarrollo
