@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Articles from "../components/Articles.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Artículos y Notas | Santiago Ruiz Diaz">
+	<Navbar />
+	<main class="page-container pt-32">
+		<Articles />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.page-container {
+		min-height: 100vh;
+		background-color: var(--primary-dark);
+	}
+</style>

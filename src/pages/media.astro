@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import SocialMedia from "../components/Media.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Redes y Medios | Santiago Ruiz Diaz">
+	<Navbar />
+	<main class="page-container pt-32">
+		<SocialMedia />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.page-container {
+		min-height: 100vh;
+		background-color: var(--primary-dark);
+	}
+</style>
