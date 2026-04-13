@@ -1,0 +1,27 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import About from "../components/About.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+	title="Sobre Mí | Santiago Ruiz Diaz - Especialista en Sexualidad y Género"
+>
+	<Navbar />
+	<main class="page-container pt-32">
+		<About />
+	</main>
+	<Footer />
+</Layout>
+
+<style>
+	.page-container {
+		min-height: 100vh;
+		background: var(--white);
+	}
+
+	[data-theme="dark"] .page-container {
+		background: var(--primary-dark);
+	}
+</style>

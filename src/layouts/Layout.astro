@@ -42,5 +42,32 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 	<body>
 		<slot />
 		<WhatsAppButton />
+
+		<!-- Script para corregir navegación entre páginas con #anclas -->
+		<script is:inline>
+			function handleHashNavigation() {
+				if (window.location.hash) {
+					const hash = window.location.hash;
+					// Pequeño retardo para asegurar que el navegador terminó de renderizar
+					setTimeout(() => {
+						const targetElement = document.querySelector(hash);
+						if (targetElement) {
+							// Ajuste de altura por el Navbar Fixed (aprox 80px)
+							const offset = 90;
+							const elementPosition = targetElement.getBoundingClientRect().top;
+							const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+							window.scrollTo({
+								top: offsetPosition,
+								behavior: 'smooth'
+							});
+						}
+					}, 200);
+				}
+			}
+
+			// Ejecutar al cargar la página
+			window.addEventListener('load', handleHashNavigation);
+		</script>
 	</body>
 </html>
