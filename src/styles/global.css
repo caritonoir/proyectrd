@@ -183,24 +183,28 @@ ul {
 
 /* REGLAS DE SEGURIDAD PARA DARK MODE */
 [data-theme="dark"] h2 {
-  color: #D4AF37 !important; /* TODOS los H2 deben ser Dorados */
+  color: #D4AF37 !important;
+  /* TODOS los H2 deben ser Dorados */
 }
 
 [data-theme="dark"] .section-header p {
-  color: #D4AF37 !important; /* Subtítulos dorados en secciones de testimonios/media */
+  color: #D4AF37 !important;
+  /* Subtítulos dorados en secciones de testimonios/media */
 }
 
 [data-theme="dark"] .detail-item strong {
-  color: #D4AF37 !important; /* Etiquetas de contacto Doradas */
+  color: #D4AF37 !important;
+  /* Etiquetas de contacto Doradas */
 }
 
 [data-theme="dark"] .detail-item p,
 [data-theme="dark"] .detail-item a {
-  color: #FFFFFF !important; /* Textos de contacto Blancos */
+  color: #FFFFFF !important;
+  /* Textos de contacto Blancos */
 }
 
 /* Fix Hero buttons to be Gold in Dark Mode */
-[data-theme="dark"] .hero .btn-primary, 
+[data-theme="dark"] .hero .btn-primary,
 [data-theme="dark"] .hero .btn-silver {
   background: #D4AF37 !important;
   color: #000000 !important;
@@ -218,29 +222,39 @@ ul {
 
 /* FIX: Icon background in Services in Dark Mode */
 [data-theme="dark"] .glass-red {
-  background: #1F2937 !important; /* Gray matching the card background */
+  background: #1F2937 !important;
+  /* Gray matching the card background */
   box-shadow: none !important;
-  border: 1px solid #D4AF37 !important; /* Gold border around icon for accent */
+  border: 1px solid #D4AF37 !important;
+  /* Gold border around icon for accent */
 }
 
 /* FIX: About Experience Badge in Dark Mode */
 [data-theme="dark"] .experience-badge {
-  background: #D4AF37 !important; /* Gold background */
-  color: #000000 !important; /* Black text for readability on gold */
+  background: #D4AF37 !important;
+  /* Gold background */
+  color: #000000 !important;
+  /* Black text for readability on gold */
   border-color: #000000 !important;
 }
 
 /* FIX: Contact labels and info texts in Dark Mode */
-[data-theme="dark"] .contact-info p,
-[data-theme="dark"] .detail-item p,
-[data-theme="dark"] .detail-item a.email-link {
-  color: #FFFFFF !important; /* Pure white for high visibility */
+
+[data-theme="dark"] .detail-item p {
+  color: #FFFFFF !important;
+  /* Pure white for high visibility */
   opacity: 1 !important;
+}
+
+[data-theme="dark"] .contact-info p,
+[data-theme="dark"] .detail-item a.email-link {
+  color: #1F2937 !important;
 }
 
 /* FIX: Footer text accessibility on Red background */
 .footer-brand p,
 .footer-bottom p {
-  opacity: 0.95 !important; /* Force more visibility on the dark red background */
+  opacity: 0.95 !important;
+  /* Force more visibility on the dark red background */
   color: #FFFFFF !important;
 }
