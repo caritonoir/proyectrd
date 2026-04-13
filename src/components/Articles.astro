@@ -14,11 +14,19 @@ if (fs.existsSync(keyPath)) {
   privateKey = creds.private_key;
   folderId = import.meta.env.GDRIVE_FOLDER_ID; // El ID lo seguimos sacando del env
 } else {
-  // Producción (Netlify)
-  clientEmail = import.meta.env.GDRIVE_CLIENT_EMAIL;
-  privateKey = import.meta.env.GDRIVE_PRIVATE_KEY;
-  folderId = import.meta.env.GDRIVE_FOLDER_ID;
+// Producción (Netlify) con triple redundancia
+  clientEmail = import.meta.env.GDRIVE_CLIENT_EMAIL || process.env.GDRIVE_CLIENT_EMAIL;
+  privateKey = import.meta.env.GDRIVE_PRIVATE_KEY || process.env.GDRIVE_PRIVATE_KEY;
+  folderId = import.meta.env.GDRIVE_FOLDER_ID || process.env.GDRIVE_FOLDER_ID;
 }
+
+// Log detallado para Debug en Netlify (esto saldrá en el Deploy Log)
+console.log('Build Debug:', {
+  hasEmail: !!clientEmail,
+  hasKey: !!privateKey,
+  hasFolder: !!folderId,
+  keyLength: privateKey?.length || 0
+});
 
 const allArticlesFromDrive = await getArticlesFromDrive(clientEmail, privateKey, folderId);
 
