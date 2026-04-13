@@ -5,35 +5,43 @@ import path from 'node:path';
 export async function getArticlesFromDrive() {
   try {
     let credentials;
-    // En Netlify SSR, process.cwd() apunta a la raíz del proyecto
     const keyPath = path.resolve(process.cwd(), 'gdrive-key.json');
 
-    // 1. Prioridad: Archivo JSON (Local o si se subió por error)
+    // 1. Local: Intenta leer el archivo
     if (fs.existsSync(keyPath)) {
       credentials = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
     } 
-    // 2. Producción: Variables de Entorno (Modo SSR)
+    // 2. Producción (Astro Build): Lee variables de entorno
     else {
-      // En modo SSR de Netlify, usamos process.env para mayor compatibilidad
-      const clientEmail = process.env.GDRIVE_CLIENT_EMAIL;
-      const privateKey = process.env.GDRIVE_PRIVATE_KEY;
+      // Intentamos ambos métodos de lectura de variables
+      const clientEmail = import.meta.env.GDRIVE_CLIENT_EMAIL || process.env.GDRIVE_CLIENT_EMAIL;
+      let privateKey = import.meta.env.GDRIVE_PRIVATE_KEY || process.env.GDRIVE_PRIVATE_KEY;
 
       if (!clientEmail || !privateKey) {
         return [];
       }
 
+      // LIMPIEZA ABSOLUTA DE LA LLAVE:
+      // Removemos cabeceras, pies, comillas y TODO el espacio en blanco (incluyendo \n y \\n)
+      // para quedarnos con el bloque base64 puro y reconstruirlo limpiamente.
+      const body = privateKey
+        .replace(/-----BEGIN PRIVATE KEY-----/, '')
+        .replace(/-----END PRIVATE KEY-----/, '')
+        .replace(/\\n/g, '')
+        .replace(/\\+n/g, '')
+        .replace(/\s+/g, '')
+        .replace(/"/g, '')
+        .trim();
+
       credentials = {
         client_email: clientEmail,
-        // Regex ultra-robusta para limpiar la llave de Netlify
-        private_key: privateKey.replace(/\\+n/g, '\n').replace(/"/g, '').trim(),
+        private_key: `-----BEGIN PRIVATE KEY-----\n${body}\n-----END PRIVATE KEY-----`,
       };
     }
 
-    const folderId = process.env.GDRIVE_FOLDER_ID;
+    const folderId = import.meta.env.GDRIVE_FOLDER_ID || process.env.GDRIVE_FOLDER_ID;
 
-    if (!folderId) {
-      return [];
-    }
+    if (!folderId) return [];
 
     const auth = new google.auth.GoogleAuth({
       credentials,
@@ -42,7 +50,7 @@ export async function getArticlesFromDrive() {
 
     const drive = google.drive({ version: 'v3', auth });
 
-    // 1. Obtener subcarpetas (categorías)
+    // 1. Carpetas
     const folderResponse = await drive.files.list({
       q: `'${folderId}' in parents and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
       fields: 'files(id, name)',
@@ -53,7 +61,7 @@ export async function getArticlesFromDrive() {
     const folders = folderResponse.data.files || [];
     let allArticles = [];
 
-    // 2. Por cada carpeta, obtener los archivos
+    // 2. Archivos
     for (const folder of folders) {
       const filesResponse = await drive.files.list({
         q: `'${folder.id}' in parents and trashed = false`,
@@ -78,8 +86,7 @@ export async function getArticlesFromDrive() {
 
     return allArticles;
   } catch (error) {
-    // Log silencioso pero útil para depuración en el panel de Netlify si hiciera falta
-    console.error('Data Fetch Error:', error.message);
+    console.error('Error Drive:', error.message);
     return [];
   }
 }
