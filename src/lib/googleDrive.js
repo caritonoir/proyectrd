@@ -5,33 +5,33 @@ import path from 'node:path';
 export async function getArticlesFromDrive() {
   try {
     let credentials;
+    // En Netlify SSR, process.cwd() apunta a la raíz del proyecto
     const keyPath = path.resolve(process.cwd(), 'gdrive-key.json');
 
-    // 1. Intentar cargar desde el archivo JSON (Local)
+    // 1. Prioridad: Archivo JSON (Local o si se subió por error)
     if (fs.existsSync(keyPath)) {
       credentials = JSON.parse(fs.readFileSync(keyPath, 'utf8'));
-    }
-    // 2. Fallback: Reconstruir desde variables de entorno (Producción/CI)
+    } 
+    // 2. Producción: Variables de Entorno (Modo SSR)
     else {
-      const clientEmail = process.env.GDRIVE_CLIENT_EMAIL || import.meta.env.GDRIVE_CLIENT_EMAIL;
-      const privateKey = process.env.GDRIVE_PRIVATE_KEY || import.meta.env.GDRIVE_PRIVATE_KEY;
+      // En modo SSR de Netlify, usamos process.env para mayor compatibilidad
+      const clientEmail = process.env.GDRIVE_CLIENT_EMAIL;
+      const privateKey = process.env.GDRIVE_PRIVATE_KEY;
 
       if (!clientEmail || !privateKey) {
-        console.warn('Credenciales de Google Drive no encontradas en archivo ni en variables de entorno');
         return [];
       }
 
       credentials = {
         client_email: clientEmail,
-        // Limpiamos la llave con regex agresiva para manejar cualquier tipo de escape (\n, \\n, etc) que el hosting inyecte
+        // Regex ultra-robusta para limpiar la llave de Netlify
         private_key: privateKey.replace(/\\+n/g, '\n').replace(/"/g, '').trim(),
       };
     }
 
-    const folderId = process.env.GDRIVE_FOLDER_ID || import.meta.env.GDRIVE_FOLDER_ID;
+    const folderId = process.env.GDRIVE_FOLDER_ID;
 
     if (!folderId) {
-      console.warn('GDRIVE_FOLDER_ID no definido');
       return [];
     }
 
@@ -78,7 +78,8 @@ export async function getArticlesFromDrive() {
 
     return allArticles;
   } catch (error) {
-    console.error('Drive Error:', error.message);
+    // Log silencioso pero útil para depuración en el panel de Netlify si hiciera falta
+    console.error('Data Fetch Error:', error.message);
     return [];
   }
 }
